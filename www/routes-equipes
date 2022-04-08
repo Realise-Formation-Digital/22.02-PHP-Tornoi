@@ -1,0 +1,14 @@
+<?php
+
+// ---- TODO : Commenter ce bout de code, qu'est-ce qu'il recherche ? ----
+require_once __DIR__ . "/controllers/BaseController.php";
+require_once __DIR__ . "/controllers/EquipesController.php";
+
+// ---- TODO : Commenter ce bout de code ----
+$routes = [
+  "/api/users/list" => ['GET', 'EquipesController', 'getList'],
+  "/api/users/get" => ['GET', 'EquipesController', 'get'],
+  "/api/users/add" => ['POST', 'EquipesController', 'store'],
+  "/api/users/update" => ['PUT', 'EquipesController', 'update'],
+  "/api/users/remove" => ['DELETE', 'EquipesController', 'destroy'],
+];
