@@ -2,7 +2,10 @@
 
 // ---- TODO : Commenter ce bout de code, qu'est-ce qu'il recherche ? ----
 require_once __DIR__ . "/controllers/BaseController.php";
-require_once __DIR__ . "/controllers/joueurController.php";
+require_once __DIR__ . "/controllers/EquipeController.php";
+require_once __DIR__ . "/controllers/JoueurController.php";
+require_once __DIR__ . "/controllers/TournoiController.php";
+
 
 // ---- TODO : changer le path /api/users/... ----
 $routes = [

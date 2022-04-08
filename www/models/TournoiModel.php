@@ -47,7 +47,7 @@
          * ---- Modifier un tournoi, declare son id et une array (valeur des colonne a modifie) ----
          */
         public function updateTournoi($array, $id) {
-            // ---- Declare un array, pour chaque cle dans l'array il prend la valeur puis il les separe par ","  ----
+            // ---- Declare un array, pour chaque cle dans l'array il prend la valeur puis il les separes par ","  ----
             $values_array = [];
             foreach($array as $key => $value) {
                 $values_array[] = "$key = '$value'";
