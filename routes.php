@@ -1,8 +1,8 @@
 <?php
 
 // ---- TODO : Commenter ce bout de code, qu'est-ce qu'il recherche ? ----
-require_once __DIR__ . "/controllers/BaseController.php";
-require_once __DIR__ . "/controllers/joueursController.php";
+require_once __DIR__ . "/controllers/basejoueurcontroller.php";
+require_once __DIR__ . "/controllers/joueurscontroller.php";
 
 // ---- TODO : Commenter ce bout de code ----
 $routes = [

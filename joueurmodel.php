@@ -83,4 +83,12 @@ class JoueursModel extends Database
     );
   }
 
+  {
+    SELECT e.id, e.nom, e.entraineur, e.logo, j.nom, j.age,
+    j.nationalite
+    FROM equipe e
+    INNER JOIN joueur j ON j.equipe_id = e.id
+    ORDER BY e.nom ASC LIMIT $offset, $limit
+  }
+
 }
