@@ -4,7 +4,7 @@
   require_once __DIR__ . "/config.php";
 
   // ---- TODO : Commenter en détail ce bout de code, qu'est-ce qu'il recherche ? ----
-  require_once __DIR__ . "/routes.php";
+  require_once __DIR__ . "/routes-tournoi.php";
 
   // ---- TODO : Commenter ce bout de code ----
   $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
