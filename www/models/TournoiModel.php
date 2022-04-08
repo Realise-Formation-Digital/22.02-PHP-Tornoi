@@ -8,7 +8,7 @@
         public $nom;
         public $date;
         public $heure_debut;
-        public $heure_fun;
+        public $heure_fin;
         public $lieu;
 
         public function getAllTournoi($offset = 0, $limit = 10) {
