@@ -36,7 +36,7 @@
             return $this->insert(
                 "INSERT INTO equipe ($keys) VALUES ('$values')",
                 "EquipeModel",
-                "SELECT * FROM equipe"
+                "SELECT * FROM equipe"             
             );
         }
 

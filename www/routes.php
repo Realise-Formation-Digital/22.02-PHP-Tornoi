@@ -26,4 +26,5 @@ $routes = [
   "/api/tournoi/add" => ['POST', 'TournoiController', 'store'],
   "/api/tournoi/update" => ['PUT', 'TournoiController', 'update'],
   "/api/tournoi/remove" => ['DELETE', 'TournoiController', 'destroy'],
+  "/api/tournoi/Tournoi" => ['GET', 'TournoiController', 'gettournoi'],
 ];
