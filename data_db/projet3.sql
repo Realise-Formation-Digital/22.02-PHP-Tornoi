@@ -116,7 +116,15 @@ CREATE TABLE `tournoi` (
 --
 
 INSERT INTO `tournoi` (`id`, `nom`, `date`, `heure_debut`, `heure_fin`, `lieu`) VALUES
-(1, 'Tournoi amical suisse', '2022-05-20', '16:00:00', '18:00:00', 'Lausanne'),
+(1, 'Tournoi
+
+
+
+
+
+
+
+i amical suisse', '2022-05-20', '16:00:00', '18:00:00', 'Lausanne'),
 (2, 'Tournoi de France', '2022-07-13', '17:00:00', '19:00:00', 'Paris'),
 (3, 'Tournoi de Naples', '2022-06-10', '20:00:00', '22:00:00', '');
 
