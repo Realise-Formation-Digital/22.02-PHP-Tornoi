@@ -18,7 +18,7 @@
                 if (isset($urlParams['page']) && is_numeric($urlParams['page']) && $urlParams['page'] > 0) {
                     $offset = ($urlParams['page'] - 1) * $limit;
                 }
-
+                
                 $joueur = $joueurModel->getAllJoueur($offset, $limit);
 
                 $responseData = json_encode($joueur);

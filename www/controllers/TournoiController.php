@@ -20,7 +20,7 @@
                 if (isset($urlParams['page']) && is_numeric($urlParams['page']) && $urlParams['page'] > 0) {
                     $offset = ($urlParams['page'] - 1) * $limit;
                 }
-        
+                
                 $tournoi = $tournoiModel->getAllTournoi($offset, $limit);
         
                 $responseData = json_encode($tournoi);

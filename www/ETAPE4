@@ -1,0 +1,31 @@
+
+-- Cette requête va afficher les informations des joueurs de chaque équipes
+
+SELECT e.id, e.nom, e.entraineur, e.logo, j.nom, j.age,
+j.nationalite
+FROM equipe e
+INNER JOIN joueur j ON j.equipe_id = e.id
+ORDER BY e.nom ASC LIMIT 0, 100
+
+
+
+
+
+
+-- Cette requête va permettre d'afficher les matchs qui se dérouleront lors des différents tournois organisés
+
+SELECT t.nom, t.date, t.heure_debut, t.heure_fin, t.lieu, e.nom as
+equipe FROM tournoi t
+INNER JOIN equipe_tournoi et ON et.tournoi_id = t.id
+INNER JOIN equipe e ON e.id = et.equipe_id
+WHERE t.id = tournoi_id
+
+
+
+
+-- Cette requête va nous afficher le noms des équipes et dans quelles tournois ils participeront
+
+SELECT e.nom, e.entraineur, e.logo, t.nom as tournoi FROM equipe e
+INNER JOIN equipe_tournoi et ON et.equipe_id = e.id
+INNER JOIN tournoi t ON t.id = et.tournoi_id
+WHERE e.id = equipe_id;
