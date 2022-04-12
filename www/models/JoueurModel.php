@@ -82,11 +82,4 @@
                 "SELECT id FROM joueur WHERE id=$id"
             );
         }
-        // -----Liste les noms des equipes avec entraineur + logo, joueur et leurs age + nationalité par ordre alphabethique--
-        public function getTeamate($offset, $limit) {
-
-            return $this->getMany(
-                "SELECT equipe.id, equipe.nom, equipe.entraineur, equipe.logo, joueur.nom, joueur.age, joueur.nationalité
-                FROM equipe
-                INNER JOIN joueur
     }
