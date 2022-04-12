@@ -70,4 +70,17 @@
                 "SELECT id FROM equipe WHERE id=$id"
             );
         }
+        public function getEquipe() {
+            return $this->getMany(
+            "SELECT equipe.nom, equipe.entraineur, equipe.logo, tournoi.nom
+            FROM equipe
+            INNER JOIN equipe_tournoi
+            ON equipe_tournoi.equipe_id = equipe.id
+            INNER JOIN tournoi
+            ON tournoi.id = equipe_tournoi.tournoi_id
+            WHERE equipe.id = equipe_tournoi.equipe_id",
+            "EquipeModel"
+            
+        );
+        } 
     }

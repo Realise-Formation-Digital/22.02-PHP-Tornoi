@@ -14,6 +14,7 @@ $routes = [
   "/api/equipe/add" => ['POST', 'EquipeController', 'store'],
   "/api/equipe/update" => ['PUT', 'EquipeController', 'update'],
   "/api/equipe/remove" => ['DELETE', 'EquipeController', 'destroy'],
+  "/api/equipe/Equipe" => ['GET', 'EquipeController', 'getList'],
 
   "/api/joueur/list" => ['GET', 'JoueurController', 'getList'],
   "/api/joueur/get" => ['GET', 'JoueurController', 'get'],
