@@ -15,11 +15,14 @@ $routes = [
   "/api/equipe/update" => ['PUT', 'EquipeController', 'update'],
   "/api/equipe/remove" => ['DELETE', 'EquipeController', 'destroy'],
 
-  "/api/joueur/list" => ['GET', 'joueurController', 'getList'],
-  "/api/joueur/get" => ['GET', 'joueurController', 'get'],
-  "/api/joueur/add" => ['POST', 'joueurController', 'store'],
-  "/api/joueur/update" => ['PUT', 'joueurController', 'update'],
-  "/api/joueur/remove" => ['DELETE', 'joueurController', 'destroy'],
+  "/api/joueur/list" => ['GET', 'JoueurController', 'getList'],
+  "/api/joueur/get" => ['GET', 'JoueurController', 'get'],
+  "/api/joueur/add" => ['POST', 'JoueurController', 'store'],
+  "/api/joueur/update" => ['PUT', 'JoueurController', 'update'],
+  "/api/joueur/remove" => ['DELETE', 'JoueurController', 'destroy'],
+  "/api/joueur/Team" => ['GET', 'JoueurController', 'getTeam'],
+
+  
 
   "/api/tournoi/list" => ['GET', 'TournoiController', 'getList'],
   "/api/tournoi/get" => ['GET', 'TournoiController', 'get'],
