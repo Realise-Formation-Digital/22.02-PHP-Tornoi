@@ -17,11 +17,11 @@
             return $this->getMany(
                 "SELECT * FROM joueur ORDER BY nom ASC LIMIT $offset, $limit",
                 "JoueurModel"
-                "SELECT e.id, e.nom, e.entraineur, e.logo, j.nom, j.age,
-                j.nationalite
-                FROM equipe e
-                INNER JOIN joueur j ON j.equipe_id = e.id;
-                ORDER BY e.nom ASC LIMIT 0, 100";
+                // "SELECT e.id, e.nom, e.entraineur, e.logo, j.nom, j.age,
+                // j.nationalite
+                // FROM equipe e
+                // INNER JOIN joueur j ON j.equipe_id = e.id;
+                // ORDER BY e.nom ASC LIMIT 0, 100";
             );
         }
 
@@ -89,9 +89,4 @@
                 "SELECT equipe.id, equipe.nom, equipe.entraineur, equipe.logo, joueur.nom, joueur.age, joueur.nationalité
                 FROM equipe
                 INNER JOIN joueur
-                ON joueur.equipe_id = equipe.id
-                ORDER BY equipe.nom ASC LIMIT $offset, $limit",
-                "JoueurModel"
-            );
-        }
     }
