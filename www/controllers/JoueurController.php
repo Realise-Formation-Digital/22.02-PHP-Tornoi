@@ -30,6 +30,33 @@
                 $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
             }
         }
+        public function getTeam() {
+            try {
+                $joueurModel = new JoueurModel();
+
+                $limit = 10;
+                $urlParams = $this->getQueryStringParams();
+                if (isset($urlParams['limit']) && is_numeric($urlParams['limit'])) {
+                    $limit = $urlParams['limit'];
+                }
+
+                $offset = 0;
+                $urlParams = $this->getQueryStringParams();
+                if (isset($urlParams['page']) && is_numeric($urlParams['page']) && $urlParams['page'] > 0) {
+                    $offset = ($urlParams['page'] - 1) * $limit;
+                }
+
+                $joueur = $joueurModel->getTeamate($offset, $limit);
+
+                $responseData = json_encode($joueur);
+
+                $this->sendOutput($responseData);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+                $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
+            }
+        }
 
         public function get() {
             try {
@@ -39,7 +66,6 @@
                 if (!isset($urlParams['id']) || !is_numeric($urlParams['id'])) {
                     throw new Exception("L'identifiant est incorrect ou n'a pas été spécifié");
                 }
-
                 $joueur = $joueurModel->getSingleJoueur($urlParams['id']);
 
                 $responseData = json_encode($joueur);
