@@ -73,4 +73,18 @@
                 "SELECT id FROM tournoi WHERE id=$id"
             );
         }
+
+        public function gethoraire(){
+            return $this->getMany(
+                "SELECT tournoi.id, tournoi.nom, tournoi.date, tournoi.heure_debut, tournoi.heure_fin, tournoi.lieu, equipe.nom
+                FROM tournoi
+                INNER JOIN equipe_tournoi
+                ON equipe_tournoi.tournoi_id = tournoi.id
+                INNER JOIN equipe
+                ON equipe.id = equipe_tournoi.equipe_id
+                WHERE tournoi.id = equipe_tournoi.equipe_id",
+                "TournoiModel"
+            );
+        }
+
     }
