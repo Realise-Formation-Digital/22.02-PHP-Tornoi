@@ -5,10 +5,15 @@ require_once __DIR__ . "/controllers/BaseController.php";
 require_once __DIR__ . "/controllers/EquipeController.php";
 require_once __DIR__ . "/controllers/JoueurController.php";
 require_once __DIR__ . "/controllers/TournoiController.php";
+require_once __DIR__ . "/controllers/EquipeTournoiController.php";
 
 
 // ---- TODO : changer le path /api/users/... ----
 $routes = [
+  
+  "/api/equipetournoi/add" => ['POST', 'EquipeTournoiController', "store"],
+  "/api/equipetournoi/remove" => ['DELETE', 'EquipeTournoiController', 'destroy'],
+
   "/api/equipe/equipeTournoi" => ['GET', 'EquipeController', 'listeequipetournoi'],
   "/api/equipe/entraineurs" => ['GET', 'EquipeController', 'listentraineurs'],
   "/api/equipe/list" => ['GET', 'EquipeController', 'getList'],

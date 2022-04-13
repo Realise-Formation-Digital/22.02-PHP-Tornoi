@@ -95,5 +95,4 @@
                 "EquipeModel"
             );
         }
-
     }
