@@ -145,4 +145,37 @@
                 $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
             }
         }
+        
+        public function listentraineurs() {
+            try {
+                $EquipeModel = new EquipeModel();
+        
+                $equipe = $EquipeModel->getentraineurs();
+        
+                $responseData = json_encode($equipe);
+        
+                $this->sendOutput($responseData);
+            } catch (Error $e) {
+            $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+            $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
+            }
+        } 
+
+        public function listeequipetournoi() {
+            try {
+                $EquipeModel = new EquipeModel();
+        
+                $equipe = $EquipeModel->getequipeTournoi();
+        
+                $responseData = json_encode($equipe);
+        
+                $this->sendOutput($responseData);
+            } catch (Error $e) {
+            $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+            $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
+            }
+        }
+
     }

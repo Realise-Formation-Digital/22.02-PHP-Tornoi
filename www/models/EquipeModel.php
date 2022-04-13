@@ -7,6 +7,7 @@
         public $nom;
         public $entraineur;
         public $logo;
+        public $tournoi;
 
         public function getAllEquipe($offset = 0, $limit = 10) {
             // ---- Montre tous les équipes par nom et maximum 10 ----
@@ -68,6 +69,30 @@
             return $this->delete(
                 "DELETE FROM equipe WHERE id=$id",
                 "SELECT id FROM equipe WHERE id=$id"
+            );
+        }
+
+        public function getentraineurs(){
+            return $this->getMany(
+                "SELECT equipe.id, equipe.nom, equipe.entraineur, equipe.logo, joueur.nom, joueur.age, joueur.nationalité
+                FROM equipe
+                INNER JOIN joueur
+                ON joueur.equipe_id = equipe.id
+                ORDER BY equipe.nom ASC",
+                "EquipeModel"
+            );
+        }
+
+        public function getequipeTournoi(){
+            return $this->getMany(
+                "SELECT equipe.id, equipe.nom, equipe.entraineur, equipe.logo, tournoi.nom as tournoi
+                FROM equipe
+                INNER JOIN equipe_tournoi
+                ON equipe_tournoi.equipe_id = equipe.id
+                INNER JOIN tournoi
+                ON tournoi.id = equipe_tournoi.tournoi_id
+                WHERE equipe.id = equipe_tournoi.equipe_id",
+                "EquipeModel"
             );
         }
     }

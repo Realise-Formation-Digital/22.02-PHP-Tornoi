@@ -151,4 +151,20 @@
                 $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
             }
         }
+
+        public function listetournoi() {
+            try {
+                $tournoiModel = new TournoiModel();
+        
+                $tournoi = $tournoiModel->gethoraire();
+        
+                $responseData = json_encode($tournoi);
+        
+                $this->sendOutput($responseData);
+            } catch (Error $e) {
+            $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+            $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
+            }
+        } 
     }
