@@ -1,12 +1,12 @@
 <?php
 
-    require_once __DIR__ . "/../models/TournoiModel.php";
+    require_once __DIR__ . "/../models/EquipeModel.php";
 
-    class TournoiController extends BaseController {
+    class EquipeController extends BaseController {
 
         public function getList() {
             try {
-                $tournoiModel = new TournoiModel();
+                $EquipeModel = new EquipeModel();
         
                 $limit = 10;
                 $urlParams = $this->getQueryStringParams();
@@ -20,9 +20,9 @@
                     $offset = ($urlParams['page'] - 1) * $limit;
                 }
         
-                $tournoi = $tournoiModel->getAllTournoi($offset, $limit);
+                $equipe = $EquipeModel->getAllEquipe($offset, $limit);
         
-                $responseData = json_encode($tournoi);
+                $responseData = json_encode($equipe);
         
                 $this->sendOutput($responseData);
             } catch (Error $e) {
@@ -34,16 +34,16 @@
   
         public function get() {
             try {
-                $tournoiModel = new TournoiModel();
+                $EquipeModel = new EquipeModel();
         
                 $urlParams = $this->getQueryStringParams();
                 if (!isset($urlParams['id']) || !is_numeric($urlParams['id'])) {
                     throw new Exception("L'identifiant est incorrect ou n'a pas été spécifié");
                 }
         
-                $tournoi = $tournoiModel->getSingleTournoi($urlParams['id']);
+                $equipe = $EquipeModel->getSingleEquipe($urlParams['id']);
         
-                $responseData = json_encode($tournoi);
+                $responseData = json_encode($equipe);
         
                 $this->sendOutput($responseData);
             } catch (Error $e) {
@@ -55,7 +55,7 @@
     
         public function store() {
             try {
-                $tournoiModel = new TournoiModel();
+                $EquipeModel = new EquipeModel();
         
                 $body = $this->getBody();
                 if (!$body) {
@@ -65,30 +65,24 @@
                 if (!isset($body['nom'])) {
                     throw new Exception("Aucun nom n'a été spécifié");
                 }
-                if (!isset($body['date'])) {
-                    throw new Exception("Aucun date n'a été spécifié");
+                if (!isset($body['entraineur'])) {
+                    throw new Exception("Aucun entraineur n'a été spécifié");
                 }
-                if (!isset($body['heure_debut'])) {
-                    throw new Exception("L'heure du debut n'a pas été spécifié");
-                }
-                if (!isset($body['heure_fin'])) {
-                    throw new Exception("L'heure de fin n'a pas été spécifié");
-                }
-                if (!isset($body['lieu'])) {
-                    throw new Exception("Le lieu n'a pas été spécifié");
+                if (!isset($body['logo'])) {
+                    throw new Exception("Le logo n'a pas été spécifié");
                 }
         
                 $keys = array_keys($body);
                 $valuesToInsert = [];
                 foreach($keys as $key) {
-                    if (in_array($key, [ `nom`, `date`, `heure_debut`, `heure_fin`, `lieu`])) {
+                    if (in_array($key, [`nom`, `entraineur`, `logo`])) {
                         $valuesToInsert[$key] = $body[$key];
                     }
                 }
         
-                $tournoi = $tournoiModel->insertTournoi($valuesToInsert);
+                $equipe = $EquipeModel->insertEquipe($valuesToInsert);
         
-                $responseData = json_encode($tournoi);
+                $responseData = json_encode($equipe);
         
                 $this->sendOutput($responseData);
             } catch (Error $e) {
@@ -100,7 +94,7 @@
     
         public function update() {
             try {
-                $tournoiModel = new TournoiModel();
+                $EquipeModel = new EquipeModel();
         
                 $body = $this->getBody();
                 if (!$body) {
@@ -114,14 +108,14 @@
                 $keys = array_keys($body);
                 $valuesToUpdate = [];
                 foreach($keys as $key) {
-                    if (in_array($key, [`nom`, `date`, `heure_debut`, `heure_fin`, `lieu`])) {
+                    if (in_array($key, [`nom`, `entraineur`, `logo`])) {
                         $valuesToUpdate[$key] = $body[$key];
                     }
                 }
         
-                $tournoi = $tournoiModel->updateTournoi($valuesToUpdate, $body['id']);
+                $equipe = $EquipeModel->updateEquipe($valuesToUpdate, $body['id']);
         
-                $responseData = json_encode($tournoi);
+                $responseData = json_encode($equipe);
         
                 $this->sendOutput($responseData);
             } catch (Error $e) {
@@ -133,16 +127,16 @@
     
         public function destroy() {
             try {
-                $tournoiModel = new TournoiModel();
+                $EquipeModel = new EquipeModel();
         
                 $urlParams = $this->getQueryStringParams();
                 if (!isset($urlParams['id']) || !is_numeric($urlParams['id'])) {
                     throw new Exception("L'identifiant est incorrect ou n'a pas été spécifié");
                 }
         
-                $tournoi = $tournoiModel->deleteTournoi($urlParams['id']);
+                $equipe = $EquipeModel->deleteEquipe($urlParams['id']);
         
-                $responseData = json_encode("Le tournoi a été correctement supprimé");
+                $responseData = json_encode("L'equipe a été correctement supprimé");
         
                 $this->sendOutput($responseData);
             } catch (Error $e) {
@@ -151,14 +145,14 @@
                 $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
             }
         }
-
-        public function listetournoi() {
+        
+        public function listentraineurs() {
             try {
-                $tournoiModel = new TournoiModel();
+                $EquipeModel = new EquipeModel();
         
-                $tournoi = $tournoiModel->gethoraire();
+                $equipe = $EquipeModel->getentraineurs();
         
-                $responseData = json_encode($tournoi);
+                $responseData = json_encode($equipe);
         
                 $this->sendOutput($responseData);
             } catch (Error $e) {
@@ -167,4 +161,21 @@
             $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
             }
         } 
+
+        public function listeequipetournoi() {
+            try {
+                $EquipeModel = new EquipeModel();
+        
+                $equipe = $EquipeModel->getequipeTournoi();
+        
+                $responseData = json_encode($equipe);
+        
+                $this->sendOutput($responseData);
+            } catch (Error $e) {
+            $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+            $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            $this->sendOutput($strErrorDesc, ['Content-Type: application/json', $strErrorHeader]);
+            }
+        }
+
     }

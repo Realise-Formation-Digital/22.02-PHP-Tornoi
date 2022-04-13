@@ -1,87 +1,90 @@
 <?php
-require_once __DIR__ . "/Database.php";
 
-class tournoiModel extends Database
-{
-  public $id;
-  public $nom;
-  public $date;
-  public $heure_debut;
-  public $heure_fin;
-  public $lieu;
+    require_once __DIR__ . "/Database.php";
 
-  /**
-   * ---- TODO : Commenter cette méthode ----
-   */
-  public function getAlltournois($offset = 0, $limit = 10)
-  {
-    // ---- TODO : Commenter ce bout de code ----
-    return $this->getMany(
-      "SELECT * FROM tournois ORDER BY nom ASC LIMIT $offset, $limit",
-      "tournoiModel"
-    );
-  }
+    class TournoiModel extends Database {
 
-  /**
-   * ---- TODO : Commenter cette méthode ----
-   */
-  public function getSingletournoi($id)
-  {
-    // ---- TODO : Commenter ce bout de code ----
-    return $this->getSingle(
-      "SELECT * FROM tournois WHERE id = $id",
-      "tournoiModel"
-    );
-  }
+        public $id;
+        public $nom;
+        public $date;
+        public $heure_debut;
+        public $heure_fin;
+        public $lieu;
 
-  /**
-   * ---- TODO : Commenter cette méthode ----
-   */
-  public function inserttournoi($array)
-  {
-    // ---- TODO : Commenter ce bout de code ----
-    $keys = implode(", ", array_keys($array));
-    $values = implode("', '", array_values($array));
+        public function getAllTournoi($offset = 0, $limit = 10) {
+            // ---- Montre tous les tournois par nom et maximum 10 ----
+            return $this->getMany(
+                "SELECT * FROM tournoi ORDER BY nom ASC LIMIT $offset, $limit",
+                "TournoiModel"
+            );
+        }
 
-    // ---- TODO : Commenter ce bout de code ----
-    return $this->insert(
-      "INSERT INTO tournois ($keys) VALUES ('$values')",
-      "tournoiModel",
-      "SELECT * FROM tournois"
-    );
-  }
+        public function getSingleTournoi($id) {
+            // ---- Montre un seul tournoi par son id ----
+            return $this->getSingle(
+                "SELECT * FROM tournoi WHERE id = $id",
+                "TournoiModel"
+            );
+        }
 
-  /**
-   * ---- TODO : Commenter cette méthode ----
-   */
-  public function updatetournoi($array, $id)
-  {
-    // ---- TODO : Commenter ce bout de code ----
-    $values_array = [];
-    foreach($array as $key => $value) {
-      $values_array[] = "$key = '$value'";
+        /**
+         * ---- Inserer un tournoi ----
+         */
+        public function insertTournoi($array) {
+            // ---- Donne forme a l'array donnee dans les parametre ----
+            $keys = implode(", ", array_keys($array));
+            $values = implode("', '", array_values($array));
+
+            // ---- Insere une nouvelle ligne avec le key/values donne dans l'array  ----
+            return $this->insert(
+                "INSERT INTO tournoi ($keys) VALUES ('$values')",
+                "TournoiModel",
+                "SELECT * FROM tournoi"
+            );
+        }
+
+        /**
+         * ---- Modifier un tournoi, declare son id et une array (valeur des colonne a modifie) ----
+         */
+        public function updateTournoi($array, $id) {
+            // ---- Declare un array, pour chaque cle dans l'array il prend la valeur puis il les separes par ","  ----
+            $values_array = [];
+            foreach($array as $key => $value) {
+                $values_array[] = "$key = '$value'";
+            }
+            $values = implode(",", array_values($values_array));
+
+            // ---- Modifie le tournoi selectionné par son id ----
+            return $this->update(
+                "UPDATE tournoi SET $values WHERE id = $id",
+                "TournoiModel",
+                "SELECT id FROM tournoi WHERE id=$id",
+                "SELECT * FROM tournoi WHERE id=$id"
+            );
+        }
+
+        /**
+         * ---- Elimine un tournoi par son id ----
+         */
+        public function deleteTournoi($id) {
+            // ---- Elimine un tournoi par son id ----
+            return $this->delete(
+                "DELETE FROM tournoi WHERE id=$id",
+                "SELECT id FROM tournoi WHERE id=$id"
+            );
+        }
+
+        public function gethoraire(){
+            return $this->getMany(
+                "SELECT tournoi.id, tournoi.nom, tournoi.date, tournoi.heure_debut, tournoi.heure_fin, tournoi.lieu, equipe.nom
+                FROM tournoi
+                INNER JOIN equipe_tournoi
+                ON equipe_tournoi.tournoi_id = tournoi.id
+                INNER JOIN equipe
+                ON equipe.id = equipe_tournoi.equipe_id
+                WHERE tournoi.id = equipe_tournoi.equipe_id",
+                "TournoiModel"
+            );
+        }
+
     }
-    $values = implode(",", array_values($values_array));
-
-    // ---- TODO : Commenter ce bout de code ----
-    return $this->update(
-      "UPDATE tournois SET $values WHERE id = $id",
-      "tournoiModel",
-      "SELECT id FROM tournois WHERE id=$id",
-      "SELECT * FROM tournois WHERE id=$id"
-    );
-  }
-
-  /**
-   * ---- TODO : Commenter cette méthode ----
-   */
-  public function deletetournoi($id)
-  {
-    // ---- TODO : Commenter ce bout de code ----
-    return $this->delete(
-      "DELETE FROM tournois WHERE id=$id",
-      "SELECT id FROM tournois WHERE id=$id"
-    );
-  }
-
-}
