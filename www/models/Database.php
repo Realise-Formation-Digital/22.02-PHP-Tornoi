@@ -180,11 +180,11 @@
      * @param string $idName
      * @param string $idValue
      */
-    public function removeRelation($tableName, $idName, $idValue)
+    public function removeRelation($tableName, $id1Name, $id2Name, $id1Value, $id2Value)
     {
       try {
         // Prepare the query to the statement.
-        $statement = $this->connection->prepare("SELECT * FROM $tableName WHERE $idName = '$idValue'");
+        $statement = $this->connection->prepare("SELECT * FROM $tableName WHERE $id1Name = '$id1Value' AND $id2Name = '$id2Value'");
         // Execute the statement.
         $statement->execute();
         // Get the result.
@@ -193,7 +193,7 @@
         // Check if the relation exists before delete it.
         if ($result) {
           // Execute the query.
-          $this->connection->exec("DELETE FROM $tableName WHERE $idName = '$idValue'");
+          $this->connection->exec("DELETE FROM $tableName WHERE $id1Name = '$id1Value' AND $id2Name = '$id2Value'");
         } else {
           throw new Exception("Impossible de supprimer la relation, car aucune entrée avec cet identifié n'a été trouvé.");
         }
